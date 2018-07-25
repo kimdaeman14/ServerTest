@@ -13,7 +13,7 @@
         <!--Main View Controller-->
         <scene sceneID="kzd-uA-m37">
             <objects>
-                <viewController id="Rr6-v5-pio" customClass="MainViewController" customModule="Class0725" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MainViewController" id="Rr6-v5-pio" customClass="MainViewController" customModule="Class0725" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="pI5-2U-fOd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -220,6 +220,9 @@
                                 <rect key="frame" x="9" y="20" width="24" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="close"/>
+                                <connections>
+                                    <action selector="returnMainViewController:" destination="JqF-zG-DpE" eventType="touchUpInside" id="XYb-ft-RfO"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
