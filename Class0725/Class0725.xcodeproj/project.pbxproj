@@ -136,8 +136,8 @@
 		A78C935F21082ED200AA77DC /* Storyboard */ = {
 			isa = PBXGroup;
 			children = (
-				A78C934621082A6100AA77DC /* Main.storyboard */,
 				A78C93622108301000AA77DC /* Login.storyboard */,
+				A78C934621082A6100AA77DC /* Main.storyboard */,
 			);
 			path = Storyboard;
 			sourceTree = "<group>";
