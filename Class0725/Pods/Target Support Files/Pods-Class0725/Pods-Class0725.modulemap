@@ -1,0 +1,6 @@
+framework module Pods_Class0725 {
+  umbrella header "Pods-Class0725-umbrella.h"
+
+  export *
+  module * { export * }
+}
