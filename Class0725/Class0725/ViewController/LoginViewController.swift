@@ -18,23 +18,26 @@ class LoginViewController: UIViewController {
     @IBAction private func singUpButton(_ sender: UIButton){
         print("singUpButton")
         
-        let url = URL(string: "https://api.lhy.kr/members/profile/")
-        let header : [String : String] = ["Authorization":"Token 855da681de79ea16cdfc31ccd0a1164baae09311"]
-        
-        //여기 필요없는 encoding 이런거 있으면 에러나네.
-//        Alamofire.request(url!, method: HTTPMethod.get, parameters: nil, headers: header).validate(statusCode: 200..<400).responseData { (response) in
-//            switch response.result{
-//            case .success(let value):
-//                print(value)
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                let navigationViewController = storyboard.instantiateViewController(withIdentifier: "NavigationViewController")
-                navigationViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-                self.present(navigationViewController, animated: true)
+        let url = URL(string: "https://api.lhy.kr/members/auth-token/")
+        let header = ["username": "\(emailTextField.text ?? "")", "password":"\(pwTextField.text ?? "")"]
+
+        Alamofire.request(url!, method: HTTPMethod.post, headers: header).validate(statusCode: 200..<400).responseData { (response) in
+            switch response.result{
+            case .success(let value):
+                print(value)
+                
+               
+                
 //
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
+//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//                let navigationViewController = storyboard.instantiateViewController(withIdentifier: "NavigationViewController")
+//                navigationViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+//                self.present(navigationViewController, animated: true)
+//
+            case .failure(let error):
+                print(error)
+            }
+        }
 
     }
     

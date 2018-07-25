@@ -12,11 +12,19 @@ import Alamofire
 struct PostList: Codable {
     let title: String
     let createdDate : String
+//    let author: [Author]
+
     
     enum CodingKeys: String, CodingKey {
         case title
         case createdDate = "created_date"
     }
+    
+    struct Author: Codable {
+        let name: String
+    }
+    
+    
 }
 
 
