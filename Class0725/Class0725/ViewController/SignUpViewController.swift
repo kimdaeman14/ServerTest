@@ -25,10 +25,10 @@ class SignUpViewController: UIViewController {
     
     func signUp(){
         let url = URL(string: "https://api.lhy.kr/members/signup/")
-        let param : Parameters =
+        let params : Parameters =
             ["username": "\(emailTextField.text ?? "")", "password":"\(pwTextField.text ?? "")"]
-        
-        Alamofire.request(url!, method: HTTPMethod.post, parameters: param)
+        print(params)
+        Alamofire.request(url!, method: HTTPMethod.post, parameters: params)
         .validate(statusCode: 200..<400)
             .responseData { [weak self] (response) in
                 switch response.result{
@@ -40,7 +40,7 @@ class SignUpViewController: UIViewController {
                         print(error.localizedDescription)
                     }
                     
-                    print(self?.postlist)
+//                    print(self?.postlist)
                 case .failure(let error):
                     print(error)
                 }

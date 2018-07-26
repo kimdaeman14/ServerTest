@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 
 class LoginViewController: UIViewController {
+    var postlist: [PostList] = []
 
     @IBOutlet weak var emailTextField:UITextField!
     @IBOutlet weak var pwTextField:UITextField!
@@ -19,22 +20,27 @@ class LoginViewController: UIViewController {
         print("singUpButton")
         
         let url = URL(string: "https://api.lhy.kr/members/auth-token/")
-        let header = ["username": "\(emailTextField.text ?? "")", "password":"\(pwTextField.text ?? "")"]
-
-//        Alamofire.request(url!, method: HTTPMethod.post, headers: header).validate(statusCode: 200..<400).responseData { (response) in
-//            switch response.result{
-//            case .success(let value):
-//                print(value)
-
+        let params = ["username": "\(emailTextField.text ?? "")", "password":"\(pwTextField.text ?? "")"]
+        print(params)
+        Alamofire.request(url!, method: HTTPMethod.post, parameters: params).validate(statusCode:
+        200..<400).responseData { [weak self](response) in
+            switch response.result{
+            case .success(let value):
+                print(value)
+                
+    // TODO: - 로그인 성공에 따른 데이터값 뭐나오는지 출력하고,
+    //실패했을시 그에 해당하는 처리를 해줘야하니 에러별로 출력할것.
+            
                 let storyboard = UIStoryboard(name: "Main", bundle: nil)
                 let navigationViewController = storyboard.instantiateViewController(withIdentifier: "NavigationViewController")
                 navigationViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-                self.present(navigationViewController, animated: true)
+                self?.present(navigationViewController, animated: true)
 
-//            case .failure(let error):
-//                print(error)
-//            }
-//        }
+            case .failure(let error):
+                print(error.localizedDescription)
+                
+            }
+        }
 
     }
     

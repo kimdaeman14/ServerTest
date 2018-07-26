@@ -68,7 +68,7 @@ class ListViewController: UIViewController {
                 }catch{
                     print(error.localizedDescription)
                 }
-                print(self?.postlist)
+//                print(self?.postlist)
 
             case .failure(let error):
                 print(error)
@@ -99,7 +99,7 @@ extension ListViewController: UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         print("\n---------- [ tabelviewtabelviewtabelviewtabelviewtabelview ] ----------\n")
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-                        print(self.postlist)
+//                        print(self.postlist)
 
         cell.textLabel?.text = self.postlist[indexPath.row].title
         cell.detailTextLabel?.text = self.postlist[indexPath.row].createdDate
