@@ -11,18 +11,20 @@ import Alamofire
 
 struct PostList: Codable {
     let title: String
+    let imageCover: String? //아..이게 null인 경우도 있어서 이거 ? 안해주면 타입이 안맞아서 안뜨나보다.
     let createdDate : String
 //    let author: [Author]
 
     
-    enum CodingKeys: String, CodingKey {
+    enum CodingKeys: String, CodingKey{
         case title
+        case imageCover = "img_cover"
         case createdDate = "created_date"
     }
     
-    struct Author: Codable {
-        let name: String
-    }
+//    struct Author: Codable {
+//        let name: String
+//    }
     
     
 }
@@ -30,8 +32,13 @@ struct PostList: Codable {
 
 
 class ListViewController: UIViewController {
-    
-    var postlist: [PostList] = []
+    @IBOutlet private weak var tableView: UITableView!
+
+    var postlist: [PostList] = [] {
+        didSet {
+            self.tableView.reloadData()
+        }
+    }
 
 
     @IBAction private func logoutButton(_ sender: UIButton){
@@ -57,22 +64,18 @@ class ListViewController: UIViewController {
             case .success(let value):
                 print(value)
                 do{
-                    self?.postlist = try JSONDecoder().decode( [PostList].self, from: value)
+                    self?.postlist = try JSONDecoder().decode([PostList].self, from: value)
                 }catch{
                     print(error.localizedDescription)
                 }
                 print(self?.postlist)
-//                print(self?.postlist[4].title)
-//                print(self?.postlist[4].createdDate)
+
             case .failure(let error):
                 print(error)
             }
         }
     }
     
-    
-    
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -91,7 +94,6 @@ extension ListViewController: UITableViewDataSource{
         print("\n---------- [ numberOfRowsInSection ] ----------\n")
 
         return postlist.count
-//        return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -99,13 +101,24 @@ extension ListViewController: UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
                         print(self.postlist)
 
-//        print(self.postlist[4].title)
-//        print(self.postlist[4].createdDate)
-
         cell.textLabel?.text = self.postlist[indexPath.row].title
         cell.detailTextLabel?.text = self.postlist[indexPath.row].createdDate
+        let imageCoverURL = self.postlist[indexPath.row].imageCover
         
-        
+        //URL(string: imageCoverURL)에 값이있는지확인하고 없으면 nil있으면 url에 넣고, 아래 스코프를 실행해라는 명령.
+        //아래 스코프를 빈채로두거나 하면 에러남.
+    
+        //아 행복하다...ㅠㅠ 이래서 옵셔널 바인딩을 배우라는거구나.
+        if let imageCoverURL = imageCoverURL {
+                    let url = URL(string: imageCoverURL)
+            if let urlData = url {
+                        let data = try? Data(contentsOf: urlData)
+                if let image = data{
+                            let images = UIImage(data: image)
+                            cell.imageView?.image = images
+                }
+            }
+        }
         return cell
     }
     

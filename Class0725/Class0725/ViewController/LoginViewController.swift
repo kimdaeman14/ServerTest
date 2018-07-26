@@ -21,23 +21,20 @@ class LoginViewController: UIViewController {
         let url = URL(string: "https://api.lhy.kr/members/auth-token/")
         let header = ["username": "\(emailTextField.text ?? "")", "password":"\(pwTextField.text ?? "")"]
 
-        Alamofire.request(url!, method: HTTPMethod.post, headers: header).validate(statusCode: 200..<400).responseData { (response) in
-            switch response.result{
-            case .success(let value):
-                print(value)
-                
-               
-                
-//
-//                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//                let navigationViewController = storyboard.instantiateViewController(withIdentifier: "NavigationViewController")
-//                navigationViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
-//                self.present(navigationViewController, animated: true)
-//
-            case .failure(let error):
-                print(error)
-            }
-        }
+//        Alamofire.request(url!, method: HTTPMethod.post, headers: header).validate(statusCode: 200..<400).responseData { (response) in
+//            switch response.result{
+//            case .success(let value):
+//                print(value)
+
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let navigationViewController = storyboard.instantiateViewController(withIdentifier: "NavigationViewController")
+                navigationViewController.modalTransitionStyle = UIModalTransitionStyle.crossDissolve
+                self.present(navigationViewController, animated: true)
+
+//            case .failure(let error):
+//                print(error)
+//            }
+//        }
 
     }
     
