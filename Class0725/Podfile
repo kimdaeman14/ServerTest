@@ -6,7 +6,7 @@ target 'Class0725' do
   use_frameworks!
 
   # Pods for Class0725
-    pod 'Alamofire', '~> 4.7'
+    pod 'Alamofire'
 
 
 end
