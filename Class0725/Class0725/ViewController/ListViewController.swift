@@ -104,9 +104,9 @@ extension ListViewController: UITableViewDataSource{
         
         //URL(string: imageCoverURL)에 값이있는지확인하고 없으면 nil있으면 url에 넣고, 아래 스코프를 실행해라는 명령.
         //아래 스코프를 빈채로두거나 하면 에러남.
-        //        URLSession.shared.dataTask(with: <#T##URL#>, completionHandler: <#T##(Data?, URLResponse?, Error?) -> Void#>)
-        
         //아 행복하다...ㅠㅠ 이래서 옵셔널 바인딩을 배우라는거구나
+        
+        // TODO: - 옵셔널바인딩 수정할것 
         if let imageCoverURL = imageCoverURL {
             let url = URL(string: imageCoverURL)
             if let urlData = url {
