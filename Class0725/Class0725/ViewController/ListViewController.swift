@@ -69,7 +69,6 @@ class ListViewController: UIViewController {
                     print(error.localizedDescription)
                 }
 //                print(self?.postlist)
-
             case .failure(let error):
                 print(error)
             }
@@ -91,13 +90,11 @@ extension ListViewController: UITableViewDataSource{
     
     @available(iOS 2.0, *)
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        print("\n---------- [ numberOfRowsInSection ] ----------\n")
 
         return postlist.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        print("\n---------- [ tabelviewtabelviewtabelviewtabelviewtabelview ] ----------\n")
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
 //                        print(self.postlist)
 
@@ -107,16 +104,27 @@ extension ListViewController: UITableViewDataSource{
         
         //URL(string: imageCoverURL)에 값이있는지확인하고 없으면 nil있으면 url에 넣고, 아래 스코프를 실행해라는 명령.
         //아래 스코프를 빈채로두거나 하면 에러남.
-    
-        //아 행복하다...ㅠㅠ 이래서 옵셔널 바인딩을 배우라는거구나.
+//        URLSession.shared.dataTask(with: <#T##URL#>, completionHandler: <#T##(Data?, URLResponse?, Error?) -> Void#>)
+        
+        //아 행복하다...ㅠㅠ 이래서 옵셔널 바인딩을 배우라는거구나
         if let imageCoverURL = imageCoverURL {
                     let url = URL(string: imageCoverURL)
             if let urlData = url {
-                        let data = try? Data(contentsOf: urlData)
-                if let image = data{
-                            let images = UIImage(data: image)
-                            cell.imageView?.image = images
-                }
+                print(urlData, "urlData")
+                    URLSession.shared.dataTask(with: urlData) { (data,respones,error) in
+                        print("URLSession")
+                        //                        print(data, "data")
+                        //                        print(respones, "respones")
+                        //                            if let image = data{
+                        //                            print(image, "image")
+                        //                                let images = UIImage(data: image)
+                        //                                cell.imageView?.image = images
+                        //                            }
+                        //                    let data = try? Data(contentsOf: urlData)
+                    }
+            }else{
+                print("false")
+              
             }
         }
         return cell
