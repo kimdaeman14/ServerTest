@@ -72,7 +72,7 @@ class SignUpViewController: UIViewController {
 
     func alert(){
         let alertController = UIAlertController(title: "가입성공", message:
-            "회원가입이 완료되었습니다.", preferredStyle: UIAlertControllerStyle.alert)
+            "회원가입이  완료되었습니다.", preferredStyle: UIAlertControllerStyle.alert)
         alertController.addAction(UIAlertAction(title: "로그인하러가기", style: UIAlertActionStyle.default, handler: { [weak self](ok) in
             self?.presentingViewController?.dismiss(animated: true)
         }))
